@@ -1,0 +1,174 @@
+defaults: &defaults
+  docker:
+    - image: circleci/node:8
+  environment:
+    ATSCM_PROJECT__HOST: 185.67.228.66
+    ATSCM_PROJECT__PORT__OPC: 4888
+    ATSCM_PROJECT__PORT__HTTP: 8888
+
+version: 2
+jobs:
+  install-deps:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+      - run:
+          name: Printing setup
+          command: |
+            node -v
+            npm -v
+      - run:
+          name: Installing npm dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  lint-commit-message:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Linting commit message
+          command: git log --format=%B -n 1 $CIRCLE_SHA1 | npx commitlint
+
+  lint-source:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Linting source files
+          command: npm run lint -- --format junit --output-file ~/reports/eslint.xml
+      - store_test_results:
+          path: ~/reports
+          when: always
+      - store_artifacts:
+          path: ~/reports
+          when: always
+  unit-tests:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Creating report directory
+          command: mkdir ~/reports
+      - run:
+          name: Running tests
+          command: npm run test:unit -- --tap | npx tap-xunit > ~/reports/unit-tests.xml
+      - store_test_results:
+          path: ~/reports
+          when: always
+      - store_artifacts:
+          path: ~/reports
+          when: always
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Running atscm push
+          command: npx atscm-cli push
+
+  integration-tests:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Creating report directory
+          command: mkdir ~/reports
+      - run:
+          name: Running tests
+          command: npm run test:integration -- --tap | npx tap-xunit > ~/reports/integration-tests.xml
+      - store_test_results:
+          path: ~/reports
+          when: always
+      - store_artifacts:
+          path: ~/reports
+          when: always
+
+  export:
+    <<: *defaults
+    environment:
+      ATSCM_PROJECT__HOST: 185.67.228.66
+      ATSCM_PROJECT__PORT__OPC: 4888
+      ATSCM_PROJECT__PORT__HTTP: 8888
+      SERVER_DIR: 'atscm'
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Running atscm push
+          command: npx atscm-cli push
+      - persist_to_workspace:
+          root: .
+          paths:
+            - out
+      - store_artifacts:
+          path: out
+          when: always
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - add_ssh_keys
+      - run:
+          name: Setting up git user
+          command: git config --global user.email bump-version@ls-age.com && git config --global user.name "ls-age [bot]"
+      - run:
+          name: Deploying changes
+          command: npx bump-version release --gh-token $RELEASE_GITHUB_TOKEN
+
+workflows:
+  version: 2
+
+  build-test-deploy:
+    jobs:
+      - install-deps
+      - lint-commit-message:
+          requires:
+            - install-deps
+      - lint-source:
+          requires:
+            - install-deps
+      - unit-tests:
+          requires:
+            - install-deps
+      - build:
+          requires:
+            - install-deps
+      - integration-tests:
+          requires:
+            - build
+      - export:
+          requires:
+            - integration-tests
+      - deploy:
+          requires:
+            - lint-commit-message
+            - lint-source
+            - unit-tests
+            - build
+            - integration-tests
+            - export
+          filters:
+            branches:
+              only:
+                - master
+                - beta
