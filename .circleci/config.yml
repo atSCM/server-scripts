@@ -80,7 +80,7 @@ jobs:
           at: .
       - run:
           name: Running atscm push
-          command: npx atscm-cli push -LLLL
+          command: npx atscm-cli push
 
   integration-tests:
     <<: *defaults
@@ -103,13 +103,16 @@ jobs:
   export:
     <<: *defaults
     environment:
+      ATSCM_PROJECT__HOST: 185.67.228.66
+      ATSCM_PROJECT__PORT__OPC: 4888
+      ATSCM_PROJECT__PORT__HTTP: 8888
       SERVER_DIR: 'atscm'
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Running atscm push
-          command: npx atscm-cli push -LLLL
+          command: npx atscm-cli push
       - persist_to_workspace:
           root: .
           paths:
