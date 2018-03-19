@@ -132,6 +132,9 @@ jobs:
           name: Setting up git user
           command: git config --global user.email bump-version@ls-age.com && git config --global user.name "ls-age [bot]"
       - run:
+          name: Signing into npm
+          command: echo "$NPM_TOKEN" > ~/.npmrc
+      - run:
           name: Deploying changes
           command: npx bump-version release --gh-token $RELEASE_GITHUB_TOKEN
 
