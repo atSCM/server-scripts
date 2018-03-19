@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LukasHechenberger/server-scripts.git"
+    "url": "git+https://github.com/atSCM/server-scripts.git"
   },
   "keywords": [
     "atscm",
@@ -22,9 +22,9 @@
   "author": "Lukas Hechenberger <lukas.hechenberger@bachmann.info>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LukasHechenberger/server-scripts/issues"
+    "url": "https://github.com/atSCM/server-scripts/issues"
   },
-  "homepage": "https://github.com/LukasHechenberger/server-scripts#readme",
+  "homepage": "https://github.com/atSCM/server-scripts#readme",
   "devDependencies": {
     "@commitlint/cli": "^6.1.3",
     "@commitlint/config-conventional": "^6.1.3",
