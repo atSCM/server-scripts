@@ -12,7 +12,7 @@ function createNode(options) {
   });
 }
 
-test('igores existing nodes', async t => {
+test('ignores existing nodes', async t => {
   const nodeId = new NodeId('ns=1;s=AGENT.OBJECTS');
   const { createdNode, creatingNodeFailed } = await createNode({
     nodeId,
