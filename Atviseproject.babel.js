@@ -1,4 +1,10 @@
 import { Atviseproject } from 'atscm';
+import babel from 'rollup-plugin-babel';
+import createExports from './atscm/export';
+import symlink from './atscm/symlink';
+import rollup from './atscm/rollup';
+import ignore from './atscm/ignore';
+import { serverDirectory } from './config';
 
 /**
  * atvise-scm configuration of serverscripts.
@@ -24,6 +30,22 @@ export default class ServerScripts extends Atviseproject {
       opc: 4850,
       http: 9000,
     };
+  }
+
+  static get useTransformers() {
+    return [
+      createExports('./out'),
+      symlink('scripts', `SYSTEM/LIBRARY/ATVISE/SERVERSCRIPTS/${serverDirectory}`),
+    ]
+      .concat(super.useTransformers)
+      .concat([
+        rollup({
+          plugins: [
+            babel(),
+          ],
+        }),
+        ignore('lib'),
+      ]);
   }
 
 }

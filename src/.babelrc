@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@ls-age/babel-preset",
+      {
+        "modules": false,
+        "targets": [
+          { "node": 4 }
+        ]
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@ls-age/babel-preset",
+          {
+            "targets": [
+              { "node": 4 }
+            ]
+          }
+        ]
+      ]
+    }
+  }
+}
