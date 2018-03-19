@@ -16,6 +16,11 @@ jobs:
           keys:
             - v1-npm-deps-{{ checksum "package-lock.json" }}
       - run:
+          name: Printing setup
+          command: |
+            node -v
+            npm -v
+      - run:
           name: Installing npm dependencies
           command: npm install
       - save_cache:
