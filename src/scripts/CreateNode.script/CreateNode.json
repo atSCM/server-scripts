@@ -1,0 +1,11 @@
+{
+  "parameters": [
+    {
+      "name": "paramObjString",
+      "type": "string",
+      "trigger": "false",
+      "relative": "false",
+      "value": ""
+    }
+  ]
+}
