@@ -81,10 +81,6 @@ jobs:
       - run:
           name: Running atscm push
           command: npx atscm-cli push -LLLL
-      - persist_to_workspace:
-          root: .
-          paths:
-            - out
 
   integration-tests:
     <<: *defaults
@@ -102,6 +98,24 @@ jobs:
           when: always
       - store_artifacts:
           path: ~/reports
+          when: always
+
+  export:
+    <<: *defaults
+    environment:
+      SERVER_DIR: 'atscm'
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Running atscm push
+          command: npx atscm-cli push -LLLL
+      - persist_to_workspace:
+          root: .
+          paths:
+            - out
+      - store_artifacts:
+          path: out
           when: always
 
   deploy:
@@ -139,6 +153,9 @@ workflows:
       - integration-tests:
           requires:
             - build
+      - export:
+          requires:
+            - integration-tests
       - deploy:
           requires:
             - lint-commit-message
@@ -146,6 +163,7 @@ workflows:
             - unit-tests
             - build
             - integration-tests
+            - export
           filters:
             branches:
               only:
