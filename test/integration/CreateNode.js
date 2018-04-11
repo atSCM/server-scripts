@@ -36,3 +36,18 @@ test('creates atvise server nodes', async t => {
   t.true(createdNode);
   t.false(creatingNodeFailed);
 });
+
+test('uses reference type if provided', async t => {
+  const nodeId = new NodeId(`ns=1;s=AGENT.OBJECTS.test-reference-${Date.now()}`);
+  const { createdNode } = await createNode({
+    nodeClass: NodeClass.Variable.value,
+    nodeId,
+    parentNodeId: nodeId.parent,
+    reference: 'HasEventSource',
+    typeDefinition: new NodeId('ns=1;i=62'),
+    value: 13,
+    dataType: DataType.Integer,
+  });
+
+  t.true(createdNode);
+});
