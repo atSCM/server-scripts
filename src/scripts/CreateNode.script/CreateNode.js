@@ -50,6 +50,16 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
       throw new Error(`Node class ${nodeClass} is invalid`);
     }
 
+    if (paramObj.reference) {
+      const reference = UaNode[paramObj.reference.toUpperCase()];
+
+      if (!reference) {
+        throw new Error(`Unknown reference type '${paramObj.reference}'`);
+      }
+
+      nodeObj.reference = reference;
+    }
+
     if (node.create(nodeObj) === 0) {
       returnObj.createdNode = true;
     } else {
