@@ -37,6 +37,10 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
         nodeObj.valuerank = paramObj.valueRank >= 1 ? paramObj.valueRank : -1;
         nodeObj.value = paramObj.value;
         nodeObj.datatype = paramObj.dataType;
+
+        if (nodeObj.datatype === UaNode.DATETIME) {
+          nodeObj.value = new Date(nodeObj.value);
+        }
       }
     } else if (~BaseTypes.indexOf(nodeClass)) {
       nodeObj.reference = UaNode.HASSUBTYPE;
