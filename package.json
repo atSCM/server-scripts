@@ -1,6 +1,6 @@
 {
   "name": "@atscm/server-scripts",
-  "version": "0.2.1-beta.0",
+  "version": "0.2.1",
   "description": "An atSCM project to create the server scripts required in atSCM",
   "main": "out/exports.js",
   "scripts": {
