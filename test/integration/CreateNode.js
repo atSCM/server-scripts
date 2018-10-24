@@ -17,15 +17,16 @@ const testNodeFolder = `ns=1;s=AGENT.OBJECTS.server-scripts-tests-${
 }`;
 const testNodeId = (name = Date.now().toString(16)) => new NodeId(`${testNodeFolder}.${name}`);
 
-test.before(async t => {
+test.before(async () => {
   const nodeId = new NodeId(testNodeFolder);
-  const { createdNode, creatingNodeFailed } = await createNode({
+
+  await createNode({
     nodeClass: NodeClass.Object.value,
     nodeId,
     parentNodeId: nodeId.parent,
     typeDefinition: new NodeId('ns=1;i=61'),
   });
-})
+});
 
 test('ignores existing nodes', async t => {
   const nodeId = new NodeId('ns=1;s=AGENT.OBJECTS');
