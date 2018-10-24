@@ -1,5 +1,7 @@
 import { Atviseproject } from 'atscm';
 import babel from 'rollup-plugin-babel';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 import createExports from './atscm/export';
 import symlink from './atscm/symlink';
 import rollup from './atscm/rollup';
@@ -41,7 +43,9 @@ export default class ServerScripts extends Atviseproject {
       .concat([
         rollup({
           plugins: [
-            babel(),
+            resolve(),
+            commonjs({ include: 'node_modules/**' }),
+            babel({ exclude: 'node_modules/**' }),
           ],
         }),
         ignore('lib'),
