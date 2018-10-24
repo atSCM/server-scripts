@@ -1,5 +1,7 @@
 /* global paramObjString */
+
 import { getOptions } from '../../lib/parameters';
+import { toBinaryString } from '../../lib/encoding';
 
 export default function createNode(paramObj = getOptions(paramObjString)) {
   const InstanceTypes = [
@@ -40,6 +42,8 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
 
         if (nodeObj.datatype === UaNode.DATETIME) {
           nodeObj.value = new Date(nodeObj.value);
+        } else if (nodeObj.datatype === UaNode.BYTESTRING) {
+          nodeObj.value = toBinaryString(nodeObj.value.data);
         }
       }
     } else if (~BaseTypes.indexOf(nodeClass)) {
