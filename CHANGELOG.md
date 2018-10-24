@@ -1,3 +1,14 @@
+<a name="0.2.2"></a>
+## 0.2.2 (2018-10-24)
+
+
+### Bug Fixes
+
+* **create:** Decode binary values ([244b400](https://github.com/atSCM/server-scripts/commits/244b400))
+
+
+
+
 <a name="0.2.1"></a>
 ## 0.2.1 (2018-10-24)
 
