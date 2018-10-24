@@ -1,3 +1,14 @@
+<a name="0.2.1-beta.0"></a>
+## 0.2.1-beta.0 (2018-10-24)
+
+
+### Bug Fixes
+
+* **create:** Convert DateTime values ([#4](https://github.com/atSCM/server-scripts/issues/4)) ([31d31ea](https://github.com/atSCM/server-scripts/commits/31d31ea))
+
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2018-04-11)
 
