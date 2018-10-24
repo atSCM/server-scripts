@@ -23,6 +23,23 @@ jobs:
       - run:
           name: Installing npm dependencies
           command: npm install
+      - run:
+          name: Handling package-lock changes
+          command: |
+            if git diff --exit-code package-lock.json; then
+              echo "package-lock did not change"
+            else
+              if [[ $CIRCLE_BRANCH = *"greenkeeper/"* ]]; then
+                echo "Committing package-lock changes"
+                git add package-lock.json
+                git commit -m 'chore(package): Update lockfile [ci skip]';
+              else
+                echo "Resetting package-lock changes"
+                git checkout -- package-lock.json
+              fi
+            fi
+
+            echo "Done"
       - save_cache:
           key: v1-npm-deps-{{ checksum "package-lock.json" }}
           paths:
