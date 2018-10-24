@@ -41,7 +41,7 @@ test('ignores existing nodes', async t => {
 });
 
 test('creates atvise server nodes', async t => {
-  const nodeId = testNodeId();
+  const nodeId = testNodeId('create');
   const { createdNode, creatingNodeFailed } = await createNode({
     nodeClass: NodeClass.Variable.value,
     nodeId,
@@ -56,7 +56,7 @@ test('creates atvise server nodes', async t => {
 });
 
 test('uses reference type if provided', async t => {
-  const nodeId = testNodeId();
+  const nodeId = testNodeId('reference');
   const { createdNode } = await createNode({
     nodeClass: NodeClass.Variable.value,
     nodeId,
