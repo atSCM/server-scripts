@@ -12,6 +12,21 @@ function createNode(options) {
   });
 }
 
+const testNodeFolder = `ns=1;s=AGENT.OBJECTS.server-scripts-tests-${
+  process.env.CIRCLE_BUILD_NUM || Date.now().toString(16)
+}`;
+const testNodeId = (name = Date.now().toString(16)) => new NodeId(`${testNodeFolder}.${name}`);
+
+test.before(async t => {
+  const nodeId = new NodeId(testNodeFolder);
+  const { createdNode, creatingNodeFailed } = await createNode({
+    nodeClass: NodeClass.Object.value,
+    nodeId,
+    parentNodeId: nodeId.parent,
+    typeDefinition: new NodeId('ns=1;i=61'),
+  });
+})
+
 test('ignores existing nodes', async t => {
   const nodeId = new NodeId('ns=1;s=AGENT.OBJECTS');
   const { createdNode, creatingNodeFailed } = await createNode({
@@ -23,7 +38,7 @@ test('ignores existing nodes', async t => {
 });
 
 test('creates atvise server nodes', async t => {
-  const nodeId = new NodeId(`ns=1;s=AGENT.OBJECTS.test-${Date.now()}`);
+  const nodeId = testNodeId();
   const { createdNode, creatingNodeFailed } = await createNode({
     nodeClass: NodeClass.Variable.value,
     nodeId,
@@ -38,7 +53,7 @@ test('creates atvise server nodes', async t => {
 });
 
 test('uses reference type if provided', async t => {
-  const nodeId = new NodeId(`ns=1;s=AGENT.OBJECTS.test-reference-${Date.now()}`);
+  const nodeId = testNodeId();
   const { createdNode } = await createNode({
     nodeClass: NodeClass.Variable.value,
     nodeId,
