@@ -1,8 +1,10 @@
+import { join } from 'path';
+import { readFileSync } from 'fs';
 import test from 'ava';
 import NodeId from 'atscm/out/lib/model/opcua/NodeId';
 import { NodeClass, DataType } from 'node-opcua';
 import { serverDirectory as serverDir } from '../../config';
-import { Variant, callScript } from './_helpers';
+import { Variant, callScript, readNode } from './_helpers';
 
 const script = new NodeId(`ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.${serverDir}.CreateNode`);
 
@@ -66,4 +68,22 @@ test('uses reference type if provided', async t => {
   });
 
   t.true(createdNode);
+});
+
+test('correctly handles binary data', async t => {
+  const value = readFileSync(join(__dirname, '../fixtures/sample-binary.png'));
+
+  const nodeId = testNodeId('binary-data');
+  const { createdNode } = await createNode({
+    nodeClass: NodeClass.Variable.value,
+    nodeId,
+    parentNodeId: nodeId.parent,
+    typeDefinition: new NodeId('ns=1;i=62'),
+    value,
+    dataType: DataType.ByteString.value,
+  });
+
+  t.true(createdNode);
+
+  t.deepEqual((await readNode(nodeId)).value.value, value);
 });

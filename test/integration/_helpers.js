@@ -52,3 +52,14 @@ export async function callScript(script, options = {}) {
     [key]: values.value[i].value,
   }), {});
 }
+
+export async function readNode(nodeId) {
+  const session = await Session.create();
+
+  return new Promise((resolve, reject) => {
+    session.readVariableValue(nodeId, (err, value) => {
+      if (err) { return reject(err); }
+      return resolve(value);
+    });
+  });
+}
