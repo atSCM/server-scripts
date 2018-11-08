@@ -44,6 +44,9 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
           nodeObj.value = new Date(nodeObj.value);
         } else if (nodeObj.datatype === UaNode.BYTESTRING) {
           nodeObj.value = toBinaryString(nodeObj.value.data);
+        } else if (nodeObj.datatype === UaNode.STRING && nodeObj.value === null) {
+          // Otherwise "null" is written
+          nodeObj.value = '';
         }
       }
     } else if (~BaseTypes.indexOf(nodeClass)) {
