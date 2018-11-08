@@ -1,3 +1,14 @@
+<a name="0.2.3"></a>
+## 0.2.3 (2018-11-08)
+
+
+### Bug Fixes
+
+* **create:** Write empty string for null values ([#8](https://github.com/atSCM/server-scripts/issues/8)) ([3a5e700](https://github.com/atSCM/server-scripts/commits/3a5e700))
+
+
+
+
 <a name="0.2.2"></a>
 ## 0.2.2 (2018-10-24)
 
