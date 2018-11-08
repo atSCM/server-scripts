@@ -178,7 +178,7 @@ workflows:
             - build
       - export:
           requires:
-            - integration-tests
+            - build
       - deploy:
           requires:
             - lint-commit-message
