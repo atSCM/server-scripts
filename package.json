@@ -54,5 +54,17 @@
       "babel-register",
       "./test/_setup.js"
     ]
+  },
+  "renovate": {
+    "extends": [
+      "config:base"
+    ],
+    "semanticCommitScope": "package",
+    "packageRules": [
+      {
+        "packagePatterns": [ "rollup" ],
+        "groupName": "rollup"
+      }
+    ]
   }
 }
