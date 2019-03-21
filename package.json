@@ -59,8 +59,9 @@
     "extends": [
       "config:base"
     ],
-    "semanticCommitScope": "package",
-    "commitMessageAction": "Update",
+    "semanticCommits": false,
+    "commitMessagePrefix": "chore(package):",
+    "commitMessageTopic": "{{depName}}",
     "packageRules": [
       {
         "packagePatterns": [ "rollup" ],
