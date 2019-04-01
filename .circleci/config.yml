@@ -129,7 +129,7 @@ jobs:
           at: .
       - run:
           name: Running atscm push
-          command: npx atscm-cli push
+          command: npx atscm push
       - persist_to_workspace:
           root: .
           paths:
