@@ -97,7 +97,7 @@ jobs:
           at: .
       - run:
           name: Running atscm push
-          command: npx atscm-cli push
+          command: npx atscm push
 
   integration-tests:
     <<: *defaults
