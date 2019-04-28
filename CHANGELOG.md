@@ -1,3 +1,14 @@
+<a name="0.2.4-beta.0"></a>
+## 0.2.4-beta.0 (2019-04-28)
+
+
+### Bug Fixes
+
+* Allow creating date arrays ([#39](https://github.com/atSCM/server-scripts/issues/39)) ([07a70a9](https://github.com/atSCM/server-scripts/commits/07a70a9))
+
+
+
+
 <a name="0.2.3"></a>
 ## 0.2.3 (2018-11-08)
 
