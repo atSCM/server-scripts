@@ -41,7 +41,9 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
         nodeObj.datatype = paramObj.dataType;
 
         if (nodeObj.datatype === UaNode.DATETIME) {
-          nodeObj.value = new Date(nodeObj.value);
+          nodeObj.value = paramObj.valueRank >= 1 ?
+            nodeObj.value.map(v => new Date(v)) :
+            new Date(nodeObj.value);
         } else if (nodeObj.datatype === UaNode.BYTESTRING) {
           nodeObj.value = toBinaryString(nodeObj.value.data);
         } else if (nodeObj.datatype === UaNode.STRING && nodeObj.value === null) {
