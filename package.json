@@ -30,7 +30,7 @@
     "@commitlint/config-conventional": "7.6.0",
     "@ls-age/bump-version": "0.2.0",
     "@ls-age/eslint-config": "0.9.1",
-    "atscm": "0.6.0-beta.12",
+    "atscm": "0.6.0",
     "atscm-cli": "0.7.1",
     "ava": "1.4.1",
     "babel-preset-env": "1.7.0",
