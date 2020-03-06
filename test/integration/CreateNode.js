@@ -14,9 +14,8 @@ function createNode(options) {
   });
 }
 
-const testNodeFolder = `ns=1;s=AGENT.OBJECTS.server-scripts-tests-${
-  process.env.CIRCLE_BUILD_NUM || Date.now().toString(16)
-}`;
+const testNodeFolder = `ns=1;s=AGENT.OBJECTS.server-scripts-tests-${process.env.CIRCLE_BUILD_NUM ||
+  Date.now().toString(16)}`;
 const testNodeId = (name = Date.now().toString(16)) => new NodeId(`${testNodeFolder}.${name}`);
 
 test.before(async () => {
