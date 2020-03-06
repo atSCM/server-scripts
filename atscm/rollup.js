@@ -1,10 +1,9 @@
-import { join } from 'path';
+import { extname } from 'path';
 import { PartialTransformer } from 'atscm';
 import { rollup } from 'rollup';
 import Logger from 'gulplog';
 
 export class RollupTransformer extends PartialTransformer {
-
   constructor(options) {
     super(options);
 
@@ -12,12 +11,13 @@ export class RollupTransformer extends PartialTransformer {
   }
 
   shouldBeTransformed(file) {
-    return file.extname === '.js';
+    return extname(file.relative) === '.js';
   }
 
   async bundle(file) {
-    const bundle = await rollup(Object.assign({}, this._options, {
-      input: join('./src', file.relative),
+    const bundle = await rollup({
+      ...this._options,
+      input: file.relative,
       onwarn({ loc, frame, message }) {
         // print location if applicable
         if (loc) {
@@ -28,7 +28,7 @@ export class RollupTransformer extends PartialTransformer {
           Logger.warn(message);
         }
       },
-    }));
+    });
 
     return bundle.generate({
       format: 'iife',
@@ -36,25 +36,16 @@ export class RollupTransformer extends PartialTransformer {
     });
   }
 
-  async transformFromFilesystem(file, _, callback) {
-    try {
-      let { code } = await this.bundle(file);
+  async transformFromFilesystem(file) {
+    if (!this.shouldBeTransformed(file)) return;
 
-      // Serverside scripts return their value at the end
-      if (file.isScript) {
-        code = `${code}
-return run();`;
-      }
+    const { code } = await this.bundle(file);
 
-      const clone = file.clone();
-      clone.contents = Buffer.from(code);
-
-      callback(null, clone);
-    } catch (e) {
-      callback(e);
-    }
+    file.setRawValue(
+      Buffer.from(`${code}
+return run();`)
+    );
   }
-
 }
 
 export default function transformWithRollup(options = {}) {

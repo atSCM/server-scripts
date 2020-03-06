@@ -6,31 +6,36 @@ export async function callMethod({ base, method: methodId, args: inputArguments 
   const session = await Session.create();
 
   return new Promise((resolve, reject) => {
-    session.call([{
-      objectId: base || methodId.parent,
-      methodId,
-      inputArguments,
-    }], (err, [{ statusCode, outputArguments }] = []) => {
-      if (err) {
-        reject(err);
-      } else if (statusCode.value !== StatusCodes.Good.value) {
-        reject(new Error(`Method failed with status ${statusCode.name}.
-(${statusCode.description})`));
-      } else {
-        resolve(outputArguments);
+    session.call(
+      [
+        {
+          objectId: base || methodId.parent,
+          methodId,
+          inputArguments,
+        },
+      ],
+      (err, [{ statusCode, outputArguments }] = []) => {
+        if (err) {
+          reject(err);
+        } else if (statusCode.value !== StatusCodes.Good.value) {
+          reject(
+            new Error(`Method failed with status ${statusCode.name}.
+(${statusCode.description})`)
+          );
+        } else {
+          resolve(outputArguments);
+        }
       }
-    });
+    );
   });
 }
 
 export class Variant {
-
   constructor(dataType, value, arrayType = ArrayType.Scalar) {
     this.dataType = dataType;
     this.value = value;
     this.arrayType = arrayType;
   }
-
 }
 
 export async function callScript(script, options = {}) {
@@ -48,9 +53,13 @@ export async function callScript(script, options = {}) {
     throw new Error(`Script failed: ${description.value}`);
   }
 
-  return keys.value.reduce((result, key, i) => Object.assign(result, {
-    [key]: values.value[i].value,
-  }), {});
+  return keys.value.reduce(
+    (result, key, i) =>
+      Object.assign(result, {
+        [key]: values.value[i].value,
+      }),
+    {}
+  );
 }
 
 export async function readNode(nodeId) {
@@ -58,7 +67,9 @@ export async function readNode(nodeId) {
 
   return new Promise((resolve, reject) => {
     session.readVariableValue(nodeId, (err, value) => {
-      if (err) { return reject(err); }
+      if (err) {
+        return reject(err);
+      }
       return resolve(value);
     });
   });

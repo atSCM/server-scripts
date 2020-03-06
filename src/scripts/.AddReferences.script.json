@@ -1,0 +1,9 @@
+{
+  "nodeId": "SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.AddReferences",
+  "dataType": "XmlElement",
+  "arrayType": "Scalar",
+  "references": {
+    "HasTypeDefinition": ["VariableTypes.ATVISE.ScriptCode"],
+    "toParent": [47]
+  }
+}

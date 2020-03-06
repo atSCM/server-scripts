@@ -4,15 +4,9 @@ import { getOptions } from '../../lib/parameters';
 import { toBinaryString } from '../../lib/encoding';
 
 export default function createNode(paramObj = getOptions(paramObjString)) {
-  const InstanceTypes = [
-    UaNode.NODECLASS_VARIABLE,
-    UaNode.NODECLASS_OBJECT,
-  ];
+  const InstanceTypes = [UaNode.NODECLASS_VARIABLE, UaNode.NODECLASS_OBJECT];
 
-  const BaseTypes = [
-    UaNode.NODECLASS_VARIABLETYPE,
-    UaNode.NODECLASS_OBJECTTYPE,
-  ];
+  const BaseTypes = [UaNode.NODECLASS_VARIABLETYPE, UaNode.NODECLASS_OBJECTTYPE];
 
   let nodeObj = {};
   const returnObj = {
@@ -41,9 +35,8 @@ export default function createNode(paramObj = getOptions(paramObjString)) {
         nodeObj.datatype = paramObj.dataType;
 
         if (nodeObj.datatype === UaNode.DATETIME) {
-          nodeObj.value = paramObj.valueRank >= 1 ?
-            nodeObj.value.map(v => new Date(v)) :
-            new Date(nodeObj.value);
+          nodeObj.value =
+            paramObj.valueRank >= 1 ? nodeObj.value.map(v => new Date(v)) : new Date(nodeObj.value);
         } else if (nodeObj.datatype === UaNode.BYTESTRING) {
           nodeObj.value = toBinaryString(nodeObj.value.data);
         } else if (nodeObj.datatype === UaNode.STRING && nodeObj.value === null) {

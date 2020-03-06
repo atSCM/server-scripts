@@ -1,7 +1,8 @@
 {
+  "nodeId": "SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm",
+  "nodeClass": "Object",
   "references": {
-    "HasTypeDefinition": [
-      "ns=0;i=61"
-    ]
+    "HasTypeDefinition": [61],
+    "toParent": [47]
   }
 }

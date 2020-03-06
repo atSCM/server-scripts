@@ -1,4 +1,5 @@
 /* global paramObjString */
+
 import { getOptions } from '../../lib/parameters';
 
 function isSingular(referenceType) {

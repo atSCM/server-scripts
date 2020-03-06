@@ -1,10 +1,6 @@
-import { join, relative } from 'path';
 import { PartialTransformer } from 'atscm';
-import Logger from 'gulplog';
-import colors from 'chalk';
 
 export class SymlinkTransformer extends PartialTransformer {
-
   constructor(source, target) {
     super({});
 
@@ -14,20 +10,15 @@ export class SymlinkTransformer extends PartialTransformer {
 
   shouldBeTransformed(file) {
     // relative path starts with the given path
-    return file.relative.split(this._source)[0] === '';
+    return file.nodeId.split(this._source)[0] === '';
   }
 
-  transformFromFilesystem(file, _, callback) {
-    const original = file.relative;
+  async transformFromFilesystem(file) {
+    if (!this.shouldBeTransformed(file)) return;
 
     // eslint-disable-next-line no-param-reassign
-    file.path = join(file.base, this._target, relative(this._source, file.relative));
-
-    Logger.debug('Link:', colors.magenta(original), '->', colors.magenta(file.relative));
-
-    callback(null, file);
+    file.specialId = file.nodeId.replace(this._source, this._target);
   }
-
 }
 
 export default function symlink(source, target) {
