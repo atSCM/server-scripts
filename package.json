@@ -36,6 +36,7 @@
     "@ls-age/bump-version": "0.2.0",
     "@ls-age/eslint-config": "^0.9.1",
     "atscm": "^1.0.0-beta.48",
+    "atscm-cli": "0.9.0",
     "ava": "1.4.1",
     "chalk": "2.4.2",
     "eslint": "5.16.0",
