@@ -2,9 +2,9 @@ defaults: &defaults
   docker:
     - image: circleci/node:8
   environment:
-    ATSCM_PROJECT__HOST: 185.67.228.66
-    ATSCM_PROJECT__PORT__OPC: 4888
-    ATSCM_PROJECT__PORT__HTTP: 8888
+    ATSCM_PROJECT__HOST: '34.70.56.48'
+    ATSCM_PROJECT__PORT__OPC: '4842'
+    ATSCM_PROJECT__PORT__HTTP: '8080'
 
 version: 2
 jobs:
