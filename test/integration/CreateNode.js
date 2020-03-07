@@ -25,7 +25,7 @@ test.before(async () => {
     nodeClass: NodeClass.Object.value,
     nodeId,
     parentNodeId: nodeId.parent,
-    typeDefinition: new NodeId('ns=1;i=61'),
+    typeDefinition: new NodeId('ns=0;i=61'),
   });
 });
 
@@ -45,9 +45,9 @@ test('creates atvise server nodes', async t => {
     nodeClass: NodeClass.Variable.value,
     nodeId,
     parentNodeId: nodeId.parent,
-    typeDefinition: new NodeId('ns=1;i=62'),
+    typeDefinition: new NodeId('ns=0;i=62'),
     value: 13,
-    dataType: DataType.Integer,
+    dataType: DataType.Int32,
   });
 
   t.true(createdNode);
@@ -61,9 +61,9 @@ test('uses reference type if provided', async t => {
     nodeId,
     parentNodeId: nodeId.parent,
     reference: 'HasEventSource',
-    typeDefinition: new NodeId('ns=1;i=62'),
+    typeDefinition: new NodeId('ns=0;i=62'),
     value: 13,
-    dataType: DataType.Integer,
+    dataType: DataType.Int32,
   });
 
   t.true(createdNode);
@@ -77,7 +77,7 @@ test('correctly handles binary data', async t => {
     nodeClass: NodeClass.Variable.value,
     nodeId,
     parentNodeId: nodeId.parent,
-    typeDefinition: new NodeId('ns=1;i=62'),
+    typeDefinition: new NodeId('ns=0;i=62'),
     value,
     dataType: DataType.ByteString.value,
   });
