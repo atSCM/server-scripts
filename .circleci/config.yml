@@ -163,7 +163,8 @@ workflows:
       - build:
           requires:
             - install-deps
-      - start-testserver
+      - start-testserver:
+          context: atscm
       - integration-tests:
           requires:
             - build
