@@ -1,3 +1,14 @@
+<a name="0.3.1"></a>
+## 0.3.1 (2020-03-07)
+
+
+### Bug Fixes
+
+* Build for legacy atserver ([#66](https://github.com/atSCM/server-scripts/issues/66)) ([a93feef](https://github.com/atSCM/server-scripts/commits/a93feef))
+
+
+
+
 <a name="0.3.0"></a>
 # 0.3.0 (2020-03-07)
 
