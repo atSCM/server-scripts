@@ -1,18 +1,15 @@
-import { Atviseproject } from 'atscm';
+import { Atviseproject, NodeId } from 'atscm';
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import createExports from './atscm/export';
 import symlink from './atscm/symlink';
 import rollup from './atscm/rollup';
-import ignore from './atscm/ignore';
 import { serverDirectory } from './config';
 
 /**
  * atvise-scm configuration of serverscripts.
  */
 export default class ServerScripts extends Atviseproject {
-
   /**
    * The atvise-server's host.
    * @type {string}
@@ -29,15 +26,26 @@ export default class ServerScripts extends Atviseproject {
    */
   static get port() {
     return {
-      opc: 4850,
-      http: 9000,
+      opc: 4840,
+      http: 80,
     };
+  }
+
+  static get nodes() {
+    return [
+      new NodeId('SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm'),
+      new NodeId('SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.AddReferences'),
+      new NodeId('SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.CreateNode'),
+      new NodeId('SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.DeleteNode'),
+    ];
   }
 
   static get useTransformers() {
     return [
-      createExports('./out'),
-      symlink('scripts', `SYSTEM/LIBRARY/ATVISE/SERVERSCRIPTS/${serverDirectory}`),
+      symlink(
+        'SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm',
+        `SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.${serverDirectory}`
+      ),
     ]
       .concat(super.useTransformers)
       .concat([
@@ -48,8 +56,6 @@ export default class ServerScripts extends Atviseproject {
             babel({ exclude: 'node_modules/**' }),
           ],
         }),
-        ignore('lib'),
       ]);
   }
-
 }

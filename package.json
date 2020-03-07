@@ -5,6 +5,8 @@
   "main": "out/exports.js",
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
+    "export": "ATSCM_CONFIG_PATH=\"$(pwd)/Atviseproject.babel.js\" node --require @babel/register ./scripts/export.js",
+    "format": "prettier --ignore-path .gitignore \"**/*\" \"!{.gitignore,CHANGELOG.md}\"",
     "lint": "eslint Atviseproject.babel.js atscm src test",
     "test": "npm-run-all test:*",
     "test:unit": "ava test/src",
@@ -26,24 +28,27 @@
   },
   "homepage": "https://github.com/atSCM/server-scripts#readme",
   "devDependencies": {
+    "@babel/core": "7.8.7",
+    "@babel/preset-env": "7.8.7",
+    "@babel/register": "^7.8.6",
     "@commitlint/cli": "7.6.1",
     "@commitlint/config-conventional": "7.6.0",
     "@ls-age/bump-version": "0.2.0",
-    "@ls-age/eslint-config": "0.9.1",
-    "atscm": "0.6.0-beta.12",
-    "atscm-cli": "0.7.1",
+    "@ls-age/eslint-config": "^0.9.1",
+    "atscm": "^1.0.0-beta.48",
+    "atscm-cli": "0.9.0",
     "ava": "1.4.1",
-    "babel-preset-env": "1.7.0",
-    "babel-register": "6.26.0",
     "chalk": "2.4.2",
     "eslint": "5.16.0",
+    "eslint-config-prettier": "^6.10.0",
     "fs-extra": "7.0.1",
     "gulplog": "1.0.0",
     "husky": "3.0.5",
     "node-opcua": "0.0.60",
     "npm-run-all": "4.1.5",
+    "prettier": "^1.19.1",
     "rollup": "0.57.1",
-    "rollup-plugin-babel": "3.0.3",
+    "rollup-plugin-babel": "4.3.3",
     "rollup-plugin-commonjs": "9.3.4",
     "rollup-plugin-node-resolve": "3.4.0",
     "tap-xunit": "2.3.0",
@@ -51,24 +56,13 @@
   },
   "ava": {
     "require": [
-      "babel-register",
+      "@babel/register",
       "./test/_setup.js"
     ]
   },
   "renovate": {
     "extends": [
-      "@ls-age"
-    ],
-    "packageRules": [
-      {
-        "packagePatterns": [
-          "rollup"
-        ],
-        "groupName": "rollup"
-      }
-    ],
-    "devDependencies": {
-      "automerge": true
-    }
+      "@ls-age:automergeDev"
+    ]
   }
 }

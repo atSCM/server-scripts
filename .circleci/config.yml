@@ -1,10 +1,10 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:8
+    - image: circleci/node:12
   environment:
-    ATSCM_PROJECT__HOST: 185.67.228.66
-    ATSCM_PROJECT__PORT__OPC: 4888
-    ATSCM_PROJECT__PORT__HTTP: 8888
+    ATSCM_PROJECT__HOST: '34.70.56.48'
+    ATSCM_PROJECT__PORT__OPC: '4842'
+    ATSCM_PROJECT__PORT__HTTP: '8080'
 
 version: 2
 jobs:
@@ -14,7 +14,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            - v1-npm-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Printing setup
           command: |
@@ -22,28 +22,11 @@ jobs:
             npm -v
       - run:
           name: Installing npm dependencies
-          command: npm install
-      - run:
-          name: Handling package-lock changes
-          command: |
-            if git diff --exit-code package-lock.json; then
-              echo "package-lock did not change"
-            else
-              if [[ $CIRCLE_BRANCH = *"greenkeeper/"* ]]; then
-                echo "Committing package-lock changes"
-                git add package-lock.json
-                git commit -m 'chore(package): Update lockfile [ci skip]';
-              else
-                echo "Resetting package-lock changes"
-                git checkout -- package-lock.json
-              fi
-            fi
-
-            echo "Done"
+          command: npm ci
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v1-npm-cache-{{ checksum "package-lock.json" }}
           paths:
-            - node_modules
+            - ~/.npm
       - persist_to_workspace:
           root: .
           paths:
@@ -66,12 +49,15 @@ jobs:
       - run:
           name: Linting source files
           command: npm run lint -- --format junit --output-file ~/reports/eslint.xml
+      - run:
+          name: Checking code formatting
+          command: npm run format -- --check
+          when: always
       - store_test_results:
           path: ~/reports
-          when: always
       - store_artifacts:
           path: ~/reports
-          when: always
+
   unit-tests:
     <<: *defaults
     steps:
@@ -85,10 +71,8 @@ jobs:
           command: npm run test:unit -- --tap | npx tap-xunit > ~/reports/unit-tests.xml
       - store_test_results:
           path: ~/reports
-          when: always
       - store_artifacts:
           path: ~/reports
-          when: always
 
   build:
     <<: *defaults
@@ -98,6 +82,17 @@ jobs:
       - run:
           name: Running atscm push
           command: npx atscm push
+
+  start-testserver:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Login to google cloud
+          command: echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+      - run:
+          name: Starting atserver in google cloud
+          command: gcloud compute instances start instance-1 --project=atscm-ci --zone=us-central1-f
 
   integration-tests:
     <<: *defaults
@@ -112,31 +107,26 @@ jobs:
           command: npm run test:integration -- --tap | npx tap-xunit > ~/reports/integration-tests.xml
       - store_test_results:
           path: ~/reports
-          when: always
       - store_artifacts:
           path: ~/reports
-          when: always
 
   export:
     <<: *defaults
-    environment:
-      ATSCM_PROJECT__HOST: 185.67.228.66
-      ATSCM_PROJECT__PORT__OPC: 4888
-      ATSCM_PROJECT__PORT__HTTP: 8888
-      SERVER_DIR: 'atscm'
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Running atscm push
-          command: npx atscm push
+          command: SERVER_DIR=atscm npx atscm push
+      - run:
+          name: Create export files
+          command: npm run export
       - persist_to_workspace:
           root: .
           paths:
             - out
       - store_artifacts:
           path: out
-          when: always
 
   deploy:
     <<: *defaults
@@ -173,12 +163,15 @@ workflows:
       - build:
           requires:
             - install-deps
+      - start-testserver:
+          context: atscm
       - integration-tests:
           requires:
             - build
+            - start-testserver
       - export:
           requires:
-            - build
+            - integration-tests
       - deploy:
           requires:
             - lint-commit-message
