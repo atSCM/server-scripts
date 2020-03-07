@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- created at 2020-03-07 09:15:28 -->
+<UANodeSet xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
+	<Extensions>
+		<atvise Version="3.4"/>
+	</Extensions>
+	<NamespaceUris>
+		<Uri>http://www.atvise.com/atServer/UA/</Uri>
+	</NamespaceUris>
+	<Aliases>
+		<!-- data types -->
+		<Alias Alias="Boolean">i=1</Alias>
+		<Alias Alias="SByte">i=2</Alias>
+		<Alias Alias="Byte">i=3</Alias>
+		<Alias Alias="Int16">i=4</Alias>
+		<Alias Alias="UInt16">i=5</Alias>
+		<Alias Alias="Int32">i=6</Alias>
+		<Alias Alias="UInt32">i=7</Alias>
+		<Alias Alias="Int64">i=8</Alias>
+		<Alias Alias="UInt64">i=9</Alias>
+		<Alias Alias="Float">i=10</Alias>
+		<Alias Alias="Double">i=11</Alias>
+		<Alias Alias="String">i=12</Alias>
+		<Alias Alias="DateTime">i=13</Alias>
+		<Alias Alias="ByteString">i=15</Alias>
+		<Alias Alias="XmlElement">i=16</Alias>
+		<Alias Alias="NodeId">i=17</Alias>
+		<Alias Alias="LocalizedText">i=21</Alias>
+		<!-- references -->
+		<Alias Alias="Organizes">i=35</Alias>
+		<Alias Alias="HasEventSource">i=36</Alias>
+		<Alias Alias="HasModellingRule">i=37</Alias>
+		<Alias Alias="HasTypeDefinition">i=40</Alias>
+		<Alias Alias="HasSubtype">i=45</Alias>
+		<Alias Alias="HasProperty">i=46</Alias>
+		<Alias Alias="HasComponent">i=47</Alias>
+		<Alias Alias="HasNotifier">i=48</Alias>
+		<Alias Alias="HasCondition">i=9006</Alias>
+		<!-- types -->
+		<Alias Alias="BaseDataType">i=24</Alias>
+		<Alias Alias="BaseObjectType">i=58</Alias>
+		<Alias Alias="FolderType">i=61</Alias>
+		<Alias Alias="BaseVariableType">i=62</Alias>
+		<Alias Alias="PropertyType">i=68</Alias>
+		<Alias Alias="AlarmConditionStateType">ns=1;i=1001</Alias>
+		<!-- modelling rules -->
+		<Alias Alias="New">i=78</Alias>
+		<Alias Alias="Shared">i=79</Alias>
+		<!-- other -->
+		<Alias Alias="Server">i=2253</Alias>
+	</Aliases>
+	<UAObject NodeId="ns=1;s=SYSTEM" BrowseName="1:SYSTEM">
+		<DisplayName Locale="en">SYSTEM</DisplayName>
+		<Description Locale="en">SYSTEM</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">i=85</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise ExportedNodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.CreateNode" ExportedBrowseName="1:CreateNode" Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY" BrowseName="1:LIBRARY">
+		<DisplayName Locale="en">LIBRARY</DisplayName>
+		<Description Locale="en">LIBRARY</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE" BrowseName="1:ATVISE">
+		<DisplayName Locale="en">ATVISE</DisplayName>
+		<Description Locale="en">ATVISE</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS" BrowseName="1:SERVERSCRIPTS">
+		<DisplayName Locale="en">SERVERSCRIPTS</DisplayName>
+		<Description Locale="en">SERVERSCRIPTS</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm" BrowseName="1:atscm">
+		<DisplayName Locale="en">atscm</DisplayName>
+		<Description Locale="en">atscm</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAVariable NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.CreateNode" BrowseName="1:CreateNode" DataType="XmlElement" AccessLevel="7" UserAccessLevel="7" Historizing="true">
+		<DisplayName Locale="en">CreateNode</DisplayName>
+		<Description Locale="en">CreateNode</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm</Reference>
+			<Reference ReferenceType="HasTypeDefinition">ns=1;s=VariableTypes.ATVISE.ScriptCode</Reference>
+		</References>
+		<Value>
+			<uax:XmlElement><![CDATA[<?xml version="1.0" encoding="UTF-8"?><script>
+ <parameter name="paramObjString" type="string" trigger="false" relative="false" value=""/>
+ <code><![CDATA[var run = (function () {
+  'use strict';
+
+  /* eslint-disable import/prefer-default-export */
+  function getOptions(jsonString) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (e) {
+      throw new Error('Failed to parse JSON');
+    }
+  }
+
+  /* eslint-disable import/prefer-default-export */
+  function toBinaryString(byteArray) {
+    return byteArray.reduce(function (p, c) {
+      return "".concat(p).concat(String.fromCharCode(c));
+    }, '');
+  }
+
+  /* global paramObjString */
+  function createNode() {
+    var paramObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getOptions(paramObjString);
+    var InstanceTypes = [UaNode.NODECLASS_VARIABLE, UaNode.NODECLASS_OBJECT];
+    var BaseTypes = [UaNode.NODECLASS_VARIABLETYPE, UaNode.NODECLASS_OBJECTTYPE];
+    var nodeObj = {};
+    var returnObj = {
+      createdNode: false,
+      creatingNodeFailed: false
+    };
+    var node = new UaNode(paramObj.nodeId);
+    var nodeClass = paramObj.nodeClass || UaNode.NODECLASS_UNSPECIFIED;
+
+    if (!node.exists()) {
+      nodeObj = {
+        browsename: paramObj.browseName,
+        nodeclass: nodeClass,
+        parent: paramObj.parentNodeId,
+        typedefinition: paramObj.typeDefinition,
+        modellingrule: paramObj.modellingRule ? paramObj.modellingRule : null
+      };
+
+      if (~InstanceTypes.indexOf(nodeClass)) {
+        nodeObj.reference = UaNode.HASCOMPONENT;
+
+        if (nodeClass === UaNode.NODECLASS_VARIABLE) {
+          nodeObj.valuerank = paramObj.valueRank >= 1 ? paramObj.valueRank : -1;
+          nodeObj.value = paramObj.value;
+          nodeObj.datatype = paramObj.dataType;
+
+          if (nodeObj.datatype === UaNode.DATETIME) {
+            nodeObj.value = paramObj.valueRank >= 1 ? nodeObj.value.map(function (v) {
+              return new Date(v);
+            }) : new Date(nodeObj.value);
+          } else if (nodeObj.datatype === UaNode.BYTESTRING) {
+            nodeObj.value = toBinaryString(nodeObj.value.data);
+          } else if (nodeObj.datatype === UaNode.STRING && nodeObj.value === null) {
+            // Otherwise "null" is written
+            nodeObj.value = '';
+          }
+        }
+      } else if (~BaseTypes.indexOf(nodeClass)) {
+        nodeObj.reference = UaNode.HASSUBTYPE;
+
+        if (nodeClass === UaNode.NODECLASS_VARIABLETYPE) {
+          nodeObj.valueRank = UaNode.VALUERANK_SCALARORONEDIMENSION;
+          nodeObj.value = '';
+          nodeObj.datatype = UaNode.STRING;
+        }
+      } else {
+        throw new Error("Node class ".concat(nodeClass, " is invalid"));
+      }
+
+      if (paramObj.reference) {
+        var reference = UaNode[paramObj.reference.toUpperCase()];
+
+        if (!reference) {
+          throw new Error("Unknown reference type '".concat(paramObj.reference, "'"));
+        }
+
+        nodeObj.reference = reference;
+      }
+
+      if (node.create(nodeObj) === 0) {
+        returnObj.createdNode = true;
+      } else {
+        returnObj.creatingNodeFailed = true;
+      }
+    }
+
+    return returnObj;
+  }
+
+  return createNode;
+
+}());
+
+return run();]]]]><![CDATA[></code>
+</script>]]></uax:XmlElement>
+		</Value>
+	</UAVariable>
+	<UAObject NodeId="ns=1;s=SYSTEM" BrowseName="1:SYSTEM">
+		<DisplayName Locale="en">SYSTEM</DisplayName>
+		<Description Locale="en">SYSTEM</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">i=85</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise ExportedNodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.AddReferences" ExportedBrowseName="1:AddReferences" Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY" BrowseName="1:LIBRARY">
+		<DisplayName Locale="en">LIBRARY</DisplayName>
+		<Description Locale="en">LIBRARY</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE" BrowseName="1:ATVISE">
+		<DisplayName Locale="en">ATVISE</DisplayName>
+		<Description Locale="en">ATVISE</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS" BrowseName="1:SERVERSCRIPTS">
+		<DisplayName Locale="en">SERVERSCRIPTS</DisplayName>
+		<Description Locale="en">SERVERSCRIPTS</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm" BrowseName="1:atscm">
+		<DisplayName Locale="en">atscm</DisplayName>
+		<Description Locale="en">atscm</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAVariable NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.AddReferences" BrowseName="1:AddReferences" DataType="XmlElement" AccessLevel="7" UserAccessLevel="7" Historizing="true">
+		<DisplayName Locale="en">AddReferences</DisplayName>
+		<Description Locale="en">AddReferences</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm</Reference>
+			<Reference ReferenceType="HasTypeDefinition">ns=1;s=VariableTypes.ATVISE.ScriptCode</Reference>
+		</References>
+		<Value>
+			<uax:XmlElement><![CDATA[<?xml version="1.0" encoding="UTF-8"?><script>
+ <parameter name="paramObjString" type="string" trigger="false" relative="false" value=""/>
+ <code><![CDATA[var run = (function () {
+  'use strict';
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+      return;
+    }
+
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  /* eslint-disable import/prefer-default-export */
+  function getOptions(jsonString) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (e) {
+      throw new Error('Failed to parse JSON');
+    }
+  }
+
+  function isSingular(referenceType) {
+    return referenceType === UaNode.HASMODELLINGRULE;
+  }
+
+  function addReferences() {
+    var paramObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : getOptions(paramObjString);
+    // add reference attempts that failed
+    var failedAttempts = [];
+    var node = new UaNode(paramObj.nodeId);
+
+    if (!node.exists()) {
+      throw new Error('Base node does not exist!');
+    }
+
+    paramObj.references.forEach(function (refGroupItem) {
+      var refType = refGroupItem.referenceIdValue;
+
+      if (isSingular(refType)) {
+        if (refGroupItem.items.length > 1) {
+          throw new Error("".concat(paramObj.nodeId, " cannot have multiple reference of type ").concat(refType));
+        } // Check existing reference
+
+
+        var _node$browse = node.browse({
+          reference: refType
+        }),
+            _node$browse2 = _slicedToArray(_node$browse, 1),
+            existing = _node$browse2[0];
+
+        if (existing) {
+          if (existing.node.nodeaddr === refGroupItem.items[0]) {
+            // Alright, this reference is already valid
+            return;
+          } // An invalid reference exists: We have to remove it first
+
+
+          node.deletereference(refType, existing.node.nodeid);
+        }
+      }
+
+      refGroupItem.items.forEach(function (targetNodeId) {
+        var targetNode = new UaNode(targetNodeId);
+
+        if (!targetNode.exists()) {
+          failedAttempts.push(targetNodeId);
+        } else if (node.addreference(refType, targetNode) !== 0) {
+          failedAttempts.push(targetNodeId);
+        }
+      });
+    });
+    return failedAttempts;
+  }
+
+  return addReferences;
+
+}());
+
+return run();]]]]><![CDATA[></code>
+</script>]]></uax:XmlElement>
+		</Value>
+	</UAVariable>
+	<UAObject NodeId="ns=1;s=SYSTEM" BrowseName="1:SYSTEM">
+		<DisplayName Locale="en">SYSTEM</DisplayName>
+		<Description Locale="en">SYSTEM</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">i=85</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise ExportedNodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.DeleteNode" ExportedBrowseName="1:DeleteNode" Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY" BrowseName="1:LIBRARY">
+		<DisplayName Locale="en">LIBRARY</DisplayName>
+		<Description Locale="en">LIBRARY</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE" BrowseName="1:ATVISE">
+		<DisplayName Locale="en">ATVISE</DisplayName>
+		<Description Locale="en">ATVISE</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS" BrowseName="1:SERVERSCRIPTS">
+		<DisplayName Locale="en">SERVERSCRIPTS</DisplayName>
+		<Description Locale="en">SERVERSCRIPTS</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAObject NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm" BrowseName="1:atscm">
+		<DisplayName Locale="en">atscm</DisplayName>
+		<Description Locale="en">atscm</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS</Reference>
+			<Reference ReferenceType="HasTypeDefinition">FolderType</Reference>
+		</References>
+		<Extensions>
+			<atvise Upstream="true"/>
+		</Extensions>
+	</UAObject>
+	<UAVariable NodeId="ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.DeleteNode" BrowseName="1:DeleteNode" DataType="XmlElement" AccessLevel="7" UserAccessLevel="7" Historizing="true">
+		<DisplayName Locale="en">DeleteNode</DisplayName>
+		<Description Locale="en">DeleteNode</Description>
+		<References>
+			<Reference ReferenceType="HasComponent" IsForward="false">ns=1;s=SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm</Reference>
+			<Reference ReferenceType="HasTypeDefinition">ns=1;s=VariableTypes.ATVISE.ScriptCode</Reference>
+		</References>
+		<Value>
+			<uax:XmlElement><![CDATA[<?xml version="1.0" encoding="UTF-8"?><script>
+ <parameter name="nodeId" type="string" trigger="false" relative="false" value=""/>
+ <code><![CDATA[var run = (function () {
+  'use strict';
+
+  /* global nodeId */
+  function deleteNode() {
+    var node = new UaNode(nodeId);
+    return node.remove();
+  }
+
+  return deleteNode;
+
+}());
+
+return run();]]]]><![CDATA[></code>
+</script>]]></uax:XmlElement>
+		</Value>
+	</UAVariable>
+</UANodeSet>
