@@ -170,7 +170,7 @@ workflows:
             - start-testserver
       - export:
           requires:
-            - build
+            - integration-tests
       - deploy:
           requires:
             - lint-commit-message
