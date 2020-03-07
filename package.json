@@ -62,18 +62,7 @@
   },
   "renovate": {
     "extends": [
-      "@ls-age"
-    ],
-    "packageRules": [
-      {
-        "packagePatterns": [
-          "rollup"
-        ],
-        "groupName": "rollup"
-      }
-    ],
-    "devDependencies": {
-      "automerge": true
-    }
+      "@ls-age:automergeDev"
+    ]
   }
 }
