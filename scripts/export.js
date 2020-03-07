@@ -24,10 +24,10 @@ export default async function createExports({
   await fsp.mkdir(dir, { recursive: true });
   await fsp.writeFile(join(dir, 'scripts.xml'), value);
   await fsp.writeFile(
-    join(dir, 'scripts.js'),
+    join(dir, 'exports.js'),
     `const { join } = require('path');
 
-module.exports = ${JSON.stringify(['exports.js'], null, '  ')}.map(name => join(__dirname, name));`
+module.exports = ${JSON.stringify(['scripts.xml'], null, '  ')}.map(name => join(__dirname, name));`
   );
   console.timeEnd('Creating export files');
 }
