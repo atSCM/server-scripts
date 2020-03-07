@@ -82,6 +82,11 @@ jobs:
       - run:
           name: Running atscm push
           command: npx atscm push
+      - run:
+          name: Create export files
+          command: npm run export
+      - store_artifacts:
+          path: out
 
   start-testserver:
     docker:
@@ -110,24 +115,6 @@ jobs:
       - store_artifacts:
           path: ~/reports
 
-  export:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Running atscm push
-          command: SERVER_DIR=atscm npx atscm push
-      - run:
-          name: Create export files
-          command: npm run export
-      - persist_to_workspace:
-          root: .
-          paths:
-            - out
-      - store_artifacts:
-          path: out
-
   deploy:
     <<: *defaults
     steps:
@@ -135,6 +122,12 @@ jobs:
       - attach_workspace:
           at: .
       - add_ssh_keys
+      - run:
+          name: Running atscm push
+          command: SERVER_DIR=atscm npx atscm push
+      - run:
+          name: Create release files
+          command: SERVER_DIR=atscm npm run export
       - run:
           name: Setting up git user
           command: git config --global user.email bump-version@ls-age.com && git config --global user.name "ls-age [bot]"
@@ -144,6 +137,8 @@ jobs:
       - run:
           name: Deploying changes
           command: npx bump-version release --gh-token $RELEASE_GITHUB_TOKEN
+      - store_artifacts:
+          path: out
 
 workflows:
   version: 2
@@ -169,9 +164,6 @@ workflows:
           requires:
             - build
             - start-testserver
-      - export:
-          requires:
-            - integration-tests
       - deploy:
           requires:
             - lint-commit-message
@@ -179,7 +171,6 @@ workflows:
             - unit-tests
             - build
             - integration-tests
-            - export
           filters:
             branches:
               only:
