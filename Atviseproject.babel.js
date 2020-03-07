@@ -1,7 +1,7 @@
 import { Atviseproject, NodeId } from 'atscm';
 import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import symlink from './atscm/symlink';
 import rollup from './atscm/rollup';
 import { serverDirectory } from './config';

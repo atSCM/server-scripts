@@ -39,7 +39,9 @@ export class RollupTransformer extends PartialTransformer {
   async transformFromFilesystem(file) {
     if (!this.shouldBeTransformed(file)) return;
 
-    const { code } = await this.bundle(file);
+    const {
+      output: [{ code }],
+    } = await this.bundle(file);
 
     file.setRawValue(
       Buffer.from(`${code}
