@@ -3,6 +3,7 @@ import { join } from 'path';
 import { callMethod } from 'atscm/out/api';
 import NodeId from 'atscm/out/lib/model/opcua/NodeId';
 import { Variant, DataType, VariantArrayType } from 'node-opcua';
+import { serverDirectory } from '../config';
 
 export default async function createExports({
   scripts = ['CreateNode', 'AddReferences', 'DeleteNode'],
@@ -16,7 +17,7 @@ export default async function createExports({
       dataType: DataType.NodeId,
       arrayType: VariantArrayType.Array,
       value: scripts.map(
-        script => new NodeId(`SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.atscm.${script}`)
+        script => new NodeId(`SYSTEM.LIBRARY.ATVISE.SERVERSCRIPTS.${serverDirectory}.${script}`)
       ),
     }),
   ]);
