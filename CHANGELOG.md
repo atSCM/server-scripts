@@ -1,3 +1,14 @@
+<a name="0.3.0"></a>
+# 0.3.0 (2020-03-07)
+
+
+### Features
+
+* Ensure singular references ([#62](https://github.com/atSCM/server-scripts/issues/62)) ([ac017ca](https://github.com/atSCM/server-scripts/commits/ac017ca))
+
+
+
+
 <a name="0.2.4"></a>
 ## 0.2.4 (2019-04-28)
 
