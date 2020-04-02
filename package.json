@@ -40,7 +40,7 @@
     "atscm": "1.0.0-beta.49",
     "atscm-cli": "1.0.0",
     "ava": "1.4.1",
-    "chalk": "2.4.2",
+    "chalk": "4.0.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.1",
     "fs-extra": "9.0.0",
