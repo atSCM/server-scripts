@@ -41,7 +41,7 @@
     "atscm-cli": "1.1.1",
     "ava": "1.4.1",
     "chalk": "4.0.0",
-    "eslint": "7.0.0",
+    "eslint": "7.1.0",
     "eslint-config-prettier": "6.11.0",
     "fs-extra": "9.0.0",
     "gulplog": "1.0.0",
