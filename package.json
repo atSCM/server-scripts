@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/atSCM/server-scripts#readme",
   "devDependencies": {
-    "@babel/core": "7.10.1",
-    "@babel/preset-env": "7.10.1",
+    "@babel/core": "7.10.2",
+    "@babel/preset-env": "7.10.2",
     "@babel/register": "7.10.1",
     "@commitlint/cli": "8.3.5",
     "@ls-age/bump-version": "0.2.0",
