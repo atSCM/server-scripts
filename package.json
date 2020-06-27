@@ -52,7 +52,7 @@
     "rollup": "2.18.1",
     "rollup-plugin-babel": "4.4.0",
     "tap-xunit": "2.3.0",
-    "through2": "3.0.2"
+    "through2": "4.0.1"
   },
   "ava": {
     "require": [
