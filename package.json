@@ -28,9 +28,9 @@
   },
   "homepage": "https://github.com/atSCM/server-scripts#readme",
   "devDependencies": {
-    "@babel/core": "7.12.10",
-    "@babel/preset-env": "7.12.11",
-    "@babel/register": "7.12.10",
+    "@babel/core": "7.12.13",
+    "@babel/preset-env": "7.12.13",
+    "@babel/register": "7.12.13",
     "@commitlint/cli": "11.0.0",
     "@ls-age/bump-version": "0.2.0",
     "@ls-age/commitlint-config": "0.0.1",
