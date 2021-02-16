@@ -38,7 +38,7 @@
     "@rollup/plugin-commonjs": "17.1.0",
     "@rollup/plugin-node-resolve": "11.2.0",
     "atscm": "1.4.1",
-    "atscm-cli": "1.1.1",
+    "atscm-cli": "1.1.2",
     "ava": "1.4.1",
     "chalk": "4.1.0",
     "eslint": "7.20.0",
