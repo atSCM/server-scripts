@@ -42,7 +42,7 @@
     "ava": "1.4.1",
     "chalk": "4.1.0",
     "eslint": "7.20.0",
-    "eslint-config-prettier": "7.2.0",
+    "eslint-config-prettier": "8.0.0",
     "fs-extra": "9.1.0",
     "gulplog": "1.0.0",
     "husky": "5.0.9",
