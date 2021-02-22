@@ -46,7 +46,7 @@
     "fs-extra": "9.1.0",
     "gulplog": "1.0.0",
     "husky": "5.1.0",
-    "node-opcua": "0.0.60",
+    "node-opcua": "0.7.4",
     "npm-run-all": "4.1.5",
     "prettier": "1.19.1",
     "rollup": "2.39.0",
