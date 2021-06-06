@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-    - image: circleci/node:12
+    - image: circleci/node:16
   environment:
     ATSCM_PROJECT__HOST: '34.70.56.48'
     ATSCM_PROJECT__PORT__OPC: '4842'
